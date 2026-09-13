@@ -1,0 +1,52 @@
+=== 21:19:15 starting karelian ===
+device: mps
+[karelian] 690 unique (grapheme, phoneme) pairs
+train pool: 552 (~80%)  dev (fixed): 69 (~10%)  test (fixed, held out): 69 (~10%)
+[karelian] frac=0.1  n_train=  55  dev_PER= 32.66%  dev_acc=  7.25%
+[karelian] frac=0.2  n_train= 110  dev_PER= 14.20%  dev_acc= 42.03%
+[karelian] frac=0.3  n_train= 166  dev_PER= 13.79%  dev_acc= 46.38%
+[karelian] frac=0.4  n_train= 221  dev_PER=  7.51%  dev_acc= 63.77%
+[karelian] frac=0.5  n_train= 276  dev_PER=  5.07%  dev_acc= 72.46%
+[karelian] frac=0.6  n_train= 331  dev_PER=  5.88%  dev_acc= 73.91%
+[karelian] frac=0.7  n_train= 386  dev_PER=  3.45%  dev_acc= 79.71%
+[karelian] frac=0.8  n_train= 442  dev_PER=  4.67%  dev_acc= 81.16%
+[karelian] frac=0.9  n_train= 497  dev_PER=  3.04%  dev_acc= 84.06%
+[karelian] frac=1.0  n_train= 552  dev_PER=  4.26%  dev_acc= 81.16%
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/karelian_learning_curve.png and /Users/sidharthbildikar/Desktop/code/karelian/outputs/karelian_learning_curve_results.csv
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/karelian_learning_curve.png
+=== 21:23:34 finished karelian ===
+=== 21:23:34 starting livonian ===
+device: mps
+[livonian] 2483 unique (grapheme, phoneme) pairs
+train pool: 1987 (~80%)  dev (fixed): 248 (~10%)  test (fixed, held out): 248 (~10%)
+[livonian] frac=0.1  n_train= 199  dev_PER=  4.65%  dev_acc= 76.61%
+[livonian] frac=0.2  n_train= 397  dev_PER=  2.74%  dev_acc= 86.69%
+[livonian] frac=0.3  n_train= 596  dev_PER=  2.03%  dev_acc= 90.32%
+[livonian] frac=0.4  n_train= 795  dev_PER=  1.15%  dev_acc= 93.95%
+[livonian] frac=0.5  n_train= 994  dev_PER=  1.15%  dev_acc= 93.55%
+[livonian] frac=0.6  n_train=1192  dev_PER=  1.48%  dev_acc= 93.15%
+[livonian] frac=0.7  n_train=1391  dev_PER=  1.53%  dev_acc= 91.94%
+[livonian] frac=0.8  n_train=1590  dev_PER=  0.99%  dev_acc= 95.16%
+[livonian] frac=0.9  n_train=1788  dev_PER=  0.88%  dev_acc= 95.97%
+[livonian] frac=1.0  n_train=1987  dev_PER=  0.71%  dev_acc= 95.97%
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/livonian_learning_curve.png and /Users/sidharthbildikar/Desktop/code/karelian/outputs/livonian_learning_curve_results.csv
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/livonian_learning_curve.png
+=== 21:38:11 finished livonian ===
+=== 21:38:11 starting ingrian ===
+device: mps
+[ingrian] 8241 unique (grapheme, phoneme) pairs
+train pool: 6593 (~80%)  dev (fixed): 824 (~10%)  test (fixed, held out): 824 (~10%)
+[ingrian] frac=0.1  n_train= 659  dev_PER=  7.12%  dev_acc= 65.17%
+[ingrian] frac=0.2  n_train=1319  dev_PER=  5.21%  dev_acc= 71.72%
+[ingrian] frac=0.3  n_train=1978  dev_PER=  3.93%  dev_acc= 78.28%
+[ingrian] frac=0.4  n_train=2637  dev_PER=  2.70%  dev_acc= 83.62%
+[ingrian] frac=0.5  n_train=3296  dev_PER=  2.85%  dev_acc= 83.25%
+[ingrian] frac=0.6  n_train=3956  dev_PER=  2.66%  dev_acc= 84.83%
+[ingrian] frac=0.7  n_train=4615  dev_PER=  1.97%  dev_acc= 87.50%
+[ingrian] frac=0.8  n_train=5274  dev_PER=  2.20%  dev_acc= 86.17%
+[ingrian] frac=0.9  n_train=5934  dev_PER=  2.37%  dev_acc= 85.19%
+[ingrian] frac=1.0  n_train=6593  dev_PER=  2.68%  dev_acc= 84.83%
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/ingrian_learning_curve.png and /Users/sidharthbildikar/Desktop/code/karelian/outputs/ingrian_learning_curve_results.csv
+saved /Users/sidharthbildikar/Desktop/code/karelian/figures/ingrian_learning_curve.png
+=== 22:40:39 finished ingrian ===
+ALL_DONE
