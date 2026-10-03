@@ -1,12 +1,10 @@
-terms = {}
 consonants = ["p", "b", "t", "d", "k", "ɡ", "t͡ʃ", "d͡ʒ", "s", "z", "ʃ", "ʒ", "h", "f", "v", "m", "n", "ŋ", "l", "r", "j"]
 vowels = ["i", "y", "u", "e", "ø", "o", "æ", "ɑ"]
 
 import csv
-with open('karelian_terms.csv', newline='') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-    for row in spamreader:
-        terms[row[0].lower()] = row[1].lower()
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
 
 def mappings(word):
     mappings = {"ä": "æ", "ö": "ø", "š": "ʃ", "č": "t͡ʃ", "ž": "ʒ", "v": "ʋ", "ʹ": "ʲ", "a": "ɑ"}
@@ -101,34 +99,36 @@ def g2p(word):
     word = velarization(word)
     return(f"/{word}/")
 
-transcribed = []
-pers_list = []
-for word in terms.keys():
-    transcribed_term = g2p(word)
-    transcribed.append(transcribed_term)
-    per = min_edit_distance(transcribed_term, terms[word])
-    pers_list.append([per, [transcribed_term, terms[word], word]])
+if __name__ == "__main__":
+    terms = {}
+    with open(ROOT / 'data' / 'karelian_terms.csv', newline='') as csvfile:
+        spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in spamreader:
+            terms[row[0].lower()] = row[1].lower()
 
-avg = 0
-for per in pers_list:
-    avg += per[0]
-avg /= len(pers_list)
+    transcribed = []
+    pers_list = []
+    for word in terms.keys():
+        transcribed_term = g2p(word)
+        transcribed.append(transcribed_term)
+        per = min_edit_distance(transcribed_term, terms[word])
+        pers_list.append([per, [transcribed_term, terms[word], word]])
 
-sorted_pers = sorted(pers_list, reverse=False)
-for i in range(len(pers_list)):
-    print(sorted_pers[i])
+    avg = 0
+    for per in pers_list:
+        avg += per[0]
+    avg /= len(pers_list)
 
-#print(transcribed)
-#print(pers)
-print(avg*100)
-#print(g2p("viizi"))
-#print(min_edit_distance("/ˈʋiːzʲi/", "/ˈʋiːzʲi/"))
+    sorted_pers = sorted(pers_list, reverse=False)
+    for i in range(len(pers_list)):
+        print(sorted_pers[i])
 
-with open('karelian_output.csv', 'w', newline='') as csvfile:
-    spamwriter = csv.writer(csvfile, delimiter=',',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    spamwriter.writerow(["orthography", "gold", "prediction", "accuracy"])
-    for per in sorted_pers:
-        spamwriter.writerow([per[1][2], per[1][1], per[1][0], round(per[0], 2)])
-    
+    print(avg*100)
+
+    with open(ROOT / 'outputs' / 'karelian_output.csv', 'w', newline='') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter=',',
+                                quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        spamwriter.writerow(["orthography", "gold", "prediction", "accuracy"])
+        for per in sorted_pers:
+            spamwriter.writerow([per[1][2], per[1][1], per[1][0], round(per[0], 2)])
 

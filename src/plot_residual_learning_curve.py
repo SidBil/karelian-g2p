@@ -1,7 +1,9 @@
-"""Re-plot a language's learning curve from its saved results CSV (no retraining).
+"""Re-plot a language's rules-on-vs-rules-off learning curve from its saved
+results CSV (no retraining).
 
-Reads outputs/<language>_learning_curve_results.csv and writes
-figures/<language>_learning_curve.png. Select the language with
+Reads outputs/<language>_residual_learning_curve_results.csv (see
+residual_learning_curve.py) and writes
+figures/<language>_residual_learning_curve.png. Select the language with
 --language/-l (default karelian).
 """
 
@@ -18,7 +20,8 @@ from g2p_model import ROOT, RULE_BASED_PER
 def parse_args():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("-l", "--language", default="karelian",
-                     help="Language name; reads outputs/<language>_learning_curve_results.csv "
+                     help="Language name; reads "
+                          "outputs/<language>_residual_learning_curve_results.csv "
                           "(default: karelian)")
     return ap.parse_args()
 
@@ -26,18 +29,19 @@ def parse_args():
 def main():
     args = parse_args()
     language = args.language
-    results_path = ROOT / "outputs" / f"{language}_learning_curve_results.csv"
-    plot_path = ROOT / "figures" / f"{language}_learning_curve.png"
+    results_path = ROOT / "outputs" / f"{language}_residual_learning_curve_results.csv"
+    plot_path = ROOT / "figures" / f"{language}_residual_learning_curve.png"
 
-    fracs, n_trains, pers = [], [], []
+    fracs, off_pers, on_pers = [], [], []
     with open(results_path) as f:
         for row in csv.DictReader(f):
             fracs.append(float(row["fraction"]))
-            n_trains.append(int(row["n_train"]))
-            pers.append(float(row["dev_per"]) * 100)
+            off_pers.append(float(row["dev_per_rules_off"]) * 100)
+            on_pers.append(float(row["dev_per_rules_on"]) * 100)
 
     plt.figure(figsize=(7, 5))
-    plt.plot(pers, marker="o", label="neural seq2seq (dev)")
+    plt.plot(off_pers, marker="o", label="rules off (plain NN)")
+    plt.plot(on_pers, marker="o", label="rules on (NN + HR, guided)")
     if language in RULE_BASED_PER:
         rb = RULE_BASED_PER[language]
         plt.axhline(rb, linestyle="--", color="gray", label=f"rule-based ({rb}%)")

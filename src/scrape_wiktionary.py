@@ -4,6 +4,9 @@ import csv
 import re
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
 session = requests.Session()
@@ -137,7 +140,7 @@ def scrape_language(lang_name, lang_code, max_workers=10):
         for link in failed:
             print(f"    {link}")
 
-    csv_file = f'{lang_name.lower()}_terms.csv'
+    csv_file = ROOT / 'data' / f'{lang_name.lower()}_terms.csv'
     print(f"  Saving {len(all_results)} entries to {csv_file}")
     with open(csv_file, 'w', newline='', encoding='utf-8') as f:
         writer = csv.DictWriter(f, fieldnames=['orthography', 'ipa'])

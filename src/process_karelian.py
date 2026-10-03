@@ -10,6 +10,8 @@ import csv
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parent.parent
+
 
 def process_karelian_data(input_path: Path, output_path: Path, dry_run: bool = False) -> dict:
     """
@@ -84,8 +86,8 @@ def main():
     parser.add_argument(
         "-i", "--input",
         type=Path,
-        default=Path("karelian_terms.csv"),
-        help="Path to input CSV file (default: karelian_terms.csv)"
+        default=ROOT / "data" / "karelian_terms.csv",
+        help="Path to input CSV file (default: data/karelian_terms.csv)"
     )
     parser.add_argument(
         "-o", "--output",
